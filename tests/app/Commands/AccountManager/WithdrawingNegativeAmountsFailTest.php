@@ -4,16 +4,16 @@ namespace tests;
 
 use App\Commands\AccountManager;
 use App\Exceptions\AmountMustBePositiveException;
-use TestCase;
 
-class WithdrawingNegativeAmountsFailTest extends TestCase
+class WithdrawingNegativeAmountsFailTest extends AccountManagerTestCase
 {
     public function testWithdrawingNegativeAmountsFails()
     {
         $this->expectException(AmountMustBePositiveException::class);
 
         $withdrawAmount = -10;
-        $accountManager = new AccountManager();
-        $accountManager->withdrawAmount($withdrawAmount);
+        /** @var AccountManager $accountManager */
+        $accountManager = app()->make(AccountManager::class);
+        $accountManager->withdrawAmount($withdrawAmount, $this->tokenA);
     }
 }

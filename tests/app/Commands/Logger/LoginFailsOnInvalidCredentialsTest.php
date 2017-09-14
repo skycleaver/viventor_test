@@ -2,7 +2,7 @@
 
 namespace tests;
 
-use App\Commands\Logger;
+use App\Commands\LoginManager;
 use App\Exceptions\InvalidCredentialsException;
 use TestCase;
 
@@ -14,7 +14,7 @@ class LoginFailsOnInvalidCredentialsTest extends TestCase
 
         $username = "wrong_username";
         $password = "password";
-        $logger = new Logger();
+        $logger = new LoginManager();
         $logger->login($username, $password);
     }
 
@@ -23,7 +23,7 @@ class LoginFailsOnInvalidCredentialsTest extends TestCase
 
         $username = "username";
         $password = "wrong_password";
-        $logger = new Logger();
+        $logger = new LoginManager();
         $logger->login($username, $password);
     }
 

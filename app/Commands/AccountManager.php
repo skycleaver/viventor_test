@@ -2,35 +2,40 @@
 
 namespace App\Commands;
 
-
 use App\Exceptions\AmountMustBePositiveException;
+use Infrastructure\AccountRepository;
 
 class AccountManager
 {
 
     /**
-     * @var int
+     * @var AccountRepository $accountRepository
      */
-    private $accountAmount = 0;
+    private $accountRepository;
 
-    public function getAccountAmount(): int
+    public function __construct(AccountRepository $accountRepository)
     {
-        return $this->accountAmount;
+        $this->accountRepository = $accountRepository;
     }
 
-    public function depositAmount(int $depositedAmount)
+    public function getAccountAmount(string $token): int
+    {
+        return $this->accountRepository->getAccountAmount($token);
+    }
+
+    public function depositAmount(int $depositedAmount, string $token)
     {
         if ($depositedAmount < 0) {
             throw new AmountMustBePositiveException();
         }
-        $this->accountAmount += $depositedAmount;
+        $this->accountRepository->depositAmount($token, $depositedAmount);
     }
 
-    public function withdrawAmount(int $withdrawAmount)
+    public function withdrawAmount(int $withdrawAmount, string $token)
     {
         if ($withdrawAmount < 0) {
             throw new AmountMustBePositiveException();
         }
-        $this->accountAmount -= $withdrawAmount;
+        $this->accountRepository->withdrawAmount($token, $withdrawAmount);
     }
 }

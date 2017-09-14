@@ -2,16 +2,16 @@
 
 namespace tests;
 
-use App\Commands\Logger;
+use App\Commands\LoginManager;
 use TestCase;
 
 class LoginSucceedsOnValidCredentialsTest extends TestCase
 {
 
-    public function testLoginFailsOnInvalidUsername() {
+    public function testLoginSucceedsOnValidCredentialsTest() {
         $username = "username";
         $password = "password";
-        $logger = new Logger();
+        $logger = new LoginManager();
         $logger->login($username, $password);
     }
 

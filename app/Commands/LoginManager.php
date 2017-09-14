@@ -5,7 +5,7 @@ namespace App\Commands;
 
 use App\Exceptions\InvalidCredentialsException;
 
-class Logger
+class LoginManager
 {
     public function login(string $username, string $password)
     {
