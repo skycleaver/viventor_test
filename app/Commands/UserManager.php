@@ -3,6 +3,7 @@
 namespace App\Commands;
 
 
+use App\Exceptions\UserNotFoundException;
 use App\User;
 
 class UserManager
@@ -23,6 +24,9 @@ class UserManager
     {
         $user = new User();
         $user = $user->where('username', $username)->where('password', $password)->first();
+        if (is_null($user)) {
+            throw new UserNotFoundException();
+        }
         return $user;
     }
 
