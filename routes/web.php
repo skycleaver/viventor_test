@@ -37,3 +37,17 @@ $router->get(
         'as' => 'getAmount', 'uses' => 'AccountController@getAmount'
     ]
 );
+
+$router->post(
+    '/signUp',
+    [
+        'as' => 'signUp', 'uses' => 'LoginController@signUp'
+    ]
+);
+
+$router->post(
+    '/login',
+    [
+        'as' => 'login', 'uses' => 'LoginController@login'
+    ]
+);

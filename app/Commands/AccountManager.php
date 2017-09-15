@@ -2,6 +2,7 @@
 
 namespace App\Commands;
 
+use App\Account;
 use App\Exceptions\AmountMustBePositiveException;
 use Infrastructure\AccountRepository;
 
@@ -37,5 +38,13 @@ class AccountManager
             throw new AmountMustBePositiveException();
         }
         $this->accountRepository->withdrawAmount($token, $withdrawAmount);
+    }
+
+    public function createNewAccount($token)
+    {
+        $account = new Account();
+        $account->token = $token;
+        $account->amount = 0;
+        $account->save();
     }
 }

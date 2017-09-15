@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Account;
 use App\Commands\AccountManager;
 use App\Exceptions\AmountMustBePositiveException;
 use App\Exceptions\InvalidCredentialsException;
