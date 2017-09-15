@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Commands\AccountManager;
 use App\Commands\UserManager;
+use App\Exceptions\AllSignupFieldsAreRequiredException;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,6 @@ class LoginController extends BaseController
 
     public function __construct(UserManager $userManager, AccountManager $accountManager)
     {
-
         $this->userManager = $userManager;
         $this->accountManager = $accountManager;
     }
@@ -30,6 +30,10 @@ class LoginController extends BaseController
     {
         $username = $request->get('username');
         $password = $request->get('password');
+
+        if (empty($username) || empty($password)) {
+            return json_encode('Both username and password must be filled');
+        }
 
         $token = $this->userManager->createNewUser($username, $password);
         $this->accountManager->createNewAccount($token);
