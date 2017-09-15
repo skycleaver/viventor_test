@@ -8,7 +8,6 @@ use Infrastructure\AccountRepository;
 
 class AccountManager
 {
-
     /**
      * @var AccountRepository $accountRepository
      */

@@ -6,7 +6,6 @@ use Infrastructure\UserRepository;
 
 class UserManager
 {
-
     /**
      * @var UserRepository
      */
@@ -14,7 +13,6 @@ class UserManager
 
     public function __construct(UserRepository $userRepository)
     {
-
         $this->userRepository = $userRepository;
     }
 
