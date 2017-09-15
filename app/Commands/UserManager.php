@@ -2,32 +2,30 @@
 
 namespace App\Commands;
 
-
-use App\Exceptions\UserNotFoundException;
-use App\User;
+use Infrastructure\UserRepository;
 
 class UserManager
 {
 
-    public function createNewUser($username, $password): string
-    {
-        $user = new User();
-        $user->username = $username;
-        $user->password = $password;
-        $user->token = substr(hash('sha256', mt_rand()), 0, 20);
-        $user->save();
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
 
-        return $user->token;
+    public function __construct(UserRepository $userRepository)
+    {
+
+        $this->userRepository = $userRepository;
     }
 
-    public function getUserByUsernameAndPassword($username, $password)
+    public function createNewUser(string $username, string $password): string
     {
-        $user = new User();
-        $user = $user->where('username', $username)->where('password', $password)->first();
-        if (is_null($user)) {
-            throw new UserNotFoundException();
-        }
-        return $user;
+        return $this->userRepository->createNewUser($username, $password);
+    }
+
+    public function getUserByUsernameAndPassword(string $username, string $password)
+    {
+        return $this->userRepository->getUserByUsernameAndPassword($username, $password);
     }
 
 }
