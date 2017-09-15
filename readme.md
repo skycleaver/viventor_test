@@ -1,21 +1,35 @@
-# Lumen PHP Framework
+# Viventor test
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+This is a test for Viventor.
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+It is a really simple API that allows the creation and logging
+in of users and the depositing or withdrawal of money from
+their accounts.
 
-## Official Documentation
+## Installing it and running it
+It runs on Lumen, so you should be sure to satisfy its
+[requirements](https://lumen.laravel.com/docs/master/installation#server-requirements).
+You should also download [SQLite](https://www.sqlite.org/snapshot/sqlite-snapshot-201709121505.tar.gz)
+so the database can, you know, run.
+You should then run `composer install` and then `php -S localhost:8000 -t public` to get
+the server up and running.
 
-Documentation for the framework can be found on the [Lumen website](http://lumen.laravel.com/docs).
+## Usage
+The available endpoints are:
+1. POST signup (username, password)
+2. POST login (username, password) token
+3. GET getAmount (HEADER: token) int
+4. POST deposit (depositAmount, HEADER: token)
+5. POST withdraw (withdrawAmount, HEADER: token)
 
-## Security Vulnerabilities
+You can see the tests running by typing `vendor/bin/phpunit tests`
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+## Further considerations
+To say this a prototype is to fall short. A lot of things
+should be improved:
+* Lumen Auth should be used. It isn't much more complicated
+than returning a token and it's tested and maintained.
+* Lumen validators should be used. See above, exchanging 'token'
+by 'JSONized string'.
+* Dividing into Domains should be considered in the future -
+the application as it is is simple enough not to need it.
